@@ -7,7 +7,7 @@ const User = require('../Models/User')
 // @route   POST /api/users
 // @access  Public
 const registerUser = asyncHandler(async (req, res) => {
-  const { firstName, email, password, lastName, phone, image } = req.body
+  const { _id,firstName, email, password, lastName, phone, image } = req.body
 
   if (!firstName || !email || !password || !lastName || !phone || !image )  {
     res.status(400)
@@ -63,7 +63,7 @@ const loginUser = asyncHandler(async (req, res) => {
 
   if (user && (await bcrypt.compare(password, user.password))) {
     res.json({
-        _id: user.id,
+        
         firstName: user.firstName,
         lastName: user.lastName,
         phone: user.phone,
@@ -87,12 +87,71 @@ const getMe = asyncHandler(async (req, res) => {
 // Generate JWT
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
-    expiresIn: '1h',
+    expiresIn: '1d',
   })
 }
+
+// Update profile
+// PUT /api/user/profile
+// private access
+const updateUserProfile = asyncHandler(async (req, res) => {
+  const { email, password, firstName , lastName ,phone ,image } = req.body
+
+  // Check for user email
+  const user = await User.findOne({  _id: req.user._id  })
+
+        
+        if (user) {
+        user.firstName = req.body.firstName  || user.firstName
+        user.lastName  = req.body.lastName || user.lastName
+        user.phone = req.body.phone || user.phone
+        user.image = req.body.image || user.image
+        user.email = req.body.email || user.email
+        }
+        
+        if (req.body.password) {
+          const salt = await bcrypt.genSalt(10)
+          const hashedPassword = await bcrypt.hash(req.body.password, salt)
+          user.password = hashedPassword || user.password
+          
+        }
+        const updateUser = await user.save()
+        res.json({
+        _id: user._id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        phone: user.phone,
+        image: user.image,
+        email: user.email,
+
+        })
+  
+})
+
+const getUserProfile =asyncHandler(async (req, res) => {
+  
+  const user = await User.findOne({ _id: req.user._id })
+
+  if (user ) {
+    res.json({
+        
+        firstName: user.firstName,
+        lastName: user.lastName,
+        phone: user.phone,
+        image: user.image,
+        email: user.email,
+        isadmin: user.isadmin,
+    })
+  } else {
+    res.status(404)
+    throw new Error('user not found')
+  }
+})
 
 module.exports = {
   registerUser,
   loginUser,
   getMe,
+  updateUserProfile,
+  getUserProfile,
 }

@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate,Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { FaUser } from 'react-icons/fa'
 import { register, reset } from '../features/auth/authSlice'
-import Spinner from '../components/Spinner'
+import Loader from '../components/Loader'
 import FileBase64 from 'react-file-base64';
 
 function Register() {
@@ -66,7 +66,7 @@ function Register() {
   }
 
   if (isLoading) {
-    return <Spinner />
+    return <Loader />
   }
 
   return (
@@ -168,6 +168,7 @@ function Register() {
             <button type='submit' className='btn btn-block'>
               Submit
             </button>
+            <h7> already a member <Link to ='/login'>Login</Link> now </h7>
           </div>
         </form>
       </section>

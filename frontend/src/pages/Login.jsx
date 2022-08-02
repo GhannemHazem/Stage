@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react'
 import { FaSignInAlt } from 'react-icons/fa'
 import { useSelector, useDispatch } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { Link,useNavigate, useSearchParams } from 'react-router-dom'
+
 import { toast } from 'react-toastify'
 import { login, reset } from '../features/auth/authSlice'
-import Spinner from '../components/Spinner'
+import Loader from '../components/Loader'
 
 function Login() {
   const [formData, setFormData] = useState({
@@ -21,15 +22,26 @@ function Login() {
     (state) => state.auth
   )
 
+  
+  
+  const [searchParams] = useSearchParams();
+
+  
+
   useEffect(() => {
+    
+    const redirect = String(searchParams.get('redirect'))
     if (isError) {
       toast.error(message)
     }
 
-    if (isSuccess || user) {
-      navigate('/')
+    if ((isSuccess || user) ) {
+      navigate('/') 
+      if (redirect === '/shipping'){
+        navigate(redirect)
+      }
     }
-
+    
     dispatch(reset())
   }, [user, isError, isSuccess, message, navigate, dispatch])
 
@@ -52,7 +64,7 @@ function Login() {
   }
 
   if (isLoading) {
-    return <Spinner />
+    return <Loader />
   }
 
   return (
@@ -61,7 +73,7 @@ function Login() {
         <h1>
           <FaSignInAlt /> Login
         </h1>
-        <p>Login and start setting goals</p>
+        <p>Login </p>
       </section>
 
       <section className='form'>
@@ -90,9 +102,12 @@ function Login() {
           </div>
 
           <div className='form-group'>
-            <button type='submit' className='btn btn-block'>
+            <button type='submit' className='btn btn-block' >
               Submit
             </button>
+
+
+            <h7> if you don't have an account <Link to ='/register'>register</Link> now </h7>
           </div>
         </form>
       </section>
