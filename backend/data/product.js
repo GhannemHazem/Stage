@@ -1,6 +1,6 @@
 const products =[
     {
-        _id :'1',
+        
         name:'name1',
         image:'img/mazarati.jpg',
         description:' wow',
@@ -12,7 +12,7 @@ const products =[
         numReviews:5,
     },
     {
-        _id :'2',
+        
         name:'name2',
         image:'img/mercedes.jpg',
         description:' wow',
@@ -24,7 +24,7 @@ const products =[
         numReviews:5,
     },
     {
-        _id :'3',
+        
         name:'name3',
         image:'img/tesla.jpg',
         description:' wow',
@@ -36,7 +36,7 @@ const products =[
         numReviews:5,
     },
     {
-        _id :'4',
+        
         name:'name4',
         image:'img/mazarati.jpg',
         description:' wow',

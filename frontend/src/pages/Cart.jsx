@@ -12,10 +12,9 @@ const Cart = () => {
 
   const auth = useSelector((state)=> state.auth)
   const {user}  = auth
-
   
   const qty = Number(searchParams.get('qty'))
-  
+
   const dispatch=useDispatch()
   const cart =useSelector(state => state.cart)
   const { cartItems } =cart

@@ -1,6 +1,7 @@
 import {  useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { logout, reset } from '../features/auth/authSlice'
+import { logoutinfo } from '../features/auth/useraction'
 import { Container, Navbar, Nav, NavDropdown  } from 'react-bootstrap'
 import { LinkContainer  } from 'react-router-bootstrap'
 
@@ -12,6 +13,7 @@ function Header() {
   
 
   const onLogout = () => {
+    dispatch(logoutinfo())
     dispatch(logout())
     dispatch(reset())
 

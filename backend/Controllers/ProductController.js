@@ -1,12 +1,14 @@
-const products = require('./data/product')
+const products = require('../Models/Product')
 const asyncHandler = require('express-async-handler')
+
+
 
 const getProducts = asyncHandler (async (req, res) => {
     const product = await products.find({})
     res.json(product)
 })
 const getProductId = asyncHandler (async (req, res) => {
-    const product=products.find(req.params.id)
+    const product= await products.findById(req.params.id)
     if (product) {
         res.json(product)
     } else {
@@ -16,4 +18,4 @@ const getProductId = asyncHandler (async (req, res) => {
     }
    
 })
-export {getProducts ,getProductId}
+module.exports = {getProducts ,getProductId}

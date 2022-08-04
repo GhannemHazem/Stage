@@ -11,8 +11,10 @@ import Register from './pages/Register'
 import Profile from './pages/Profile'
 import Dashboard from './pages/Dashboard'
 import Shipping from './pages/Shipping'
+import PlaceOrder from './pages/PlaceOrder'
 import Payment from './pages/Payment'
 import { Container } from 'react-bootstrap'
+import Order from './pages/Order'
 
 function App() {
   return (
@@ -29,12 +31,15 @@ function App() {
             <Route path='/profile' element={<Profile />} /> 
             <Route path='/Cart/:id' element={<Cart />} /> 
             <Route path='/Cart' element={<Cart />} /> 
+            <Route path='/Order/:id' element={<Order />} /> 
             <Route path='/Dashboard' element={<Dashboard />} /> 
             <Route path='/Shipping' element={<Shipping />} /> 
+            <Route path='/Placeorder' element={<PlaceOrder />} /> 
             <Route path='/Payment' element={<Payment />} /> 
             <Route path='/login' element={<Login />}  />
             <Route path='/register' element={<Register />} />
             <Route path='/product/:id' element={<Product />} />
+           
             {/* <Route path='*' element={<Navigate to ='/' />} />  */}
           </Routes>
           {/* <Footer /> */}

@@ -1,4 +1,5 @@
 import { USER_DETAIL_FAIL, 
+    USER_DETAIL_LOGOUT, 
     USER_DETAIL_REQUEST,
      USER_DETAIL_SUCCES,
       USER_UPDATE_FAIL,
@@ -24,6 +25,7 @@ export const UserDetails = (id) => async(dispatch,getState)=> {
             type: USER_DETAIL_SUCCES,
             payload: data,
         })
+      
     } catch (error) {
         dispatch({
             type:USER_DETAIL_FAIL,
@@ -36,7 +38,12 @@ export const UserDetails = (id) => async(dispatch,getState)=> {
 
 }
 
-
+export const logoutinfo =() => async(dispatch) =>{
+    dispatch ({
+        type: USER_DETAIL_LOGOUT,
+        payload: localStorage.removeItem('userInfo'),
+    })
+}
 
 export const UpdateUserProfile = (users) => async(dispatch,getState)=> {
     try {

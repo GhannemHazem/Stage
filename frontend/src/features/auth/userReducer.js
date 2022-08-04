@@ -1,4 +1,5 @@
 import { USER_DETAIL_FAIL,
+      USER_DETAIL_LOGOUT,
       USER_DETAIL_REQUEST,
       USER_DETAIL_SUCCES, 
       USER_UPDATE_FAIL, 
@@ -12,7 +13,9 @@ export const usertDetailReducer = (state = { userInfo:{} }, action ) => {
             return {loading :false, userInfo : action.payload};
         case USER_DETAIL_FAIL:
             return {loading :false, error : action.payload};
-        default :
+            case USER_DETAIL_LOGOUT:
+                return {loading: false ,userInfo: {}}
+        default : 
             return state;
     } 
 
@@ -26,6 +29,7 @@ export const usertUpdateProfileReducer = (state = {}, action ) => {
             return {loading :false, sucess:true,userInfo : action.payload};
         case USER_UPDATE_FAIL:
             return {loading :false, error : action.payload};
+        
         default :
             return state;
     } 

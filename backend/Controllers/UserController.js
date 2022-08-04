@@ -33,7 +33,7 @@ const registerUser = asyncHandler(async (req, res) => {
     lastName,
     phone,
     image,
-    password: hashedPassword, //not same
+    password: hashedPassword, // same password but hashed
   })
 
   if (user) {
