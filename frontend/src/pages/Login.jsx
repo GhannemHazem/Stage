@@ -59,7 +59,7 @@ function Login() {
       email,
       password,
     }
-
+    //check if he is banned
     dispatch(login(userData))
   }
 

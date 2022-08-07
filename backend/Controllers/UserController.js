@@ -63,12 +63,13 @@ const loginUser = asyncHandler(async (req, res) => {
 
   if (user && (await bcrypt.compare(password, user.password))) {
     res.json({
-        
+        _id:user._id,
         firstName: user.firstName,
         lastName: user.lastName,
         phone: user.phone,
         image: user.image,
         email: user.email,
+        isadmin: user.isadmin,
         token: generateToken(user._id),
     })
   } else {
@@ -140,7 +141,7 @@ const getUserProfile =asyncHandler(async (req, res) => {
         phone: user.phone,
         image: user.image,
         email: user.email,
-        isadmin: user.isadmin,
+     
     })
   } else {
     res.status(404)
@@ -148,10 +149,94 @@ const getUserProfile =asyncHandler(async (req, res) => {
   }
 })
 
+const getAllUsersAdmin =asyncHandler(async (req, res) => {
+  
+  const users = await User.find({})
+
+  if (users) {
+    res.json(users)
+  } else {
+    res.status(404)
+    throw new Error('users not found')
+  }
+})
+
+const adminDeleteUser =asyncHandler(async (req, res) => {
+  
+  const user = await User.findById(req.params.id)
+
+
+  if (user) {
+    await user.remove()
+    res.json({message: 'user deleted'})
+  } else {
+    res.status(404)
+    throw new Error('user not deleted')
+  }
+})
+
+
+
+
+
+
+
+const adminGetUser =asyncHandler(async (req, res) => {
+  
+  const user = await User.findById( req.params.id ).select('-password')
+
+  if (user ) {
+    res.json(user)
+  } else {
+    res.status(404)
+    throw new Error('user not found')
+  }
+})
+
+
+
+const updateUserAdmin = asyncHandler(async (req, res) => {
+  const { email,  firstName , lastName ,phone ,image,bloque,isadmin} = req.body
+
+  // Check for user email
+  const user = await User.findById( req.params.id  )
+
+        
+        if (user) {
+        user.firstName = req.body.firstName  || user.firstName
+        user.lastName  = req.body.lastName || user.lastName
+        user.phone = req.body.phone || user.phone
+        user.image = req.body.image || user.image
+        user.email = req.body.email || user.email
+        user.bloque = req.body.bloque 
+        user.isadmin = req.body.isadmin || user.isadmin
+        }
+        
+        
+        const updateUser = await user.save()
+        res.json({
+        _id: user._id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        phone: user.phone,
+        image: user.image,
+        email: user.email,
+        bloque: user.bloque,
+        isadmin: user.isadmin,
+
+        })
+  
+})
+
+
 module.exports = {
   registerUser,
   loginUser,
   getMe,
   updateUserProfile,
   getUserProfile,
+  getAllUsersAdmin,
+  adminDeleteUser,
+  adminGetUser,
+  updateUserAdmin
 }

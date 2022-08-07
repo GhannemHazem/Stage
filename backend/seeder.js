@@ -48,8 +48,31 @@ const destroyData =async () =>{
 
     }
 }
+
+const addusers =async () =>{
+    try {
+        await User.insertMany(users)
+       
+
+        console.log('add users');
+        process.exit()
+    } catch (error) {
+        console.log(error);
+        process.exit(1)
+
+    }
+}
+
+
 if (process.argv[2] === '-d') {
     destroyData()  
+}else if (process.argv[2] === '-u'){
+    addusers();
 }else{
     importData();
 }
+
+//to run the script you need npm run seeder -d/u
+//d: destroy
+//u: add users
+//without - delete and import  

@@ -10,9 +10,10 @@ password: bcrypt.hashSync('123',10),
 lastName: 'odji',
 phone: '20151258',
 image: 'image/go',
-},{
+},
+{
     isadmin: false,
-    email: 'ok@g.g' ,
+    email: 'sb-ccojx19844217@personal.example.com' ,
     firstName: 'ok',
     password: bcrypt.hashSync('123',10),
     lastName: 'ok',

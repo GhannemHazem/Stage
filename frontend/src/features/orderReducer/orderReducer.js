@@ -3,7 +3,14 @@ import {ORDER_CREATE_SUCCES,
     ORDER_CREATE_REQUEST,
     ORDER_DETAILS_SUCCES,
     ORDER_DETAILS_FAIL,
-    ORDER_DETAILS_REQUEST
+    ORDER_DETAILS_REQUEST,
+    ORDER_PAY_REQUEST,
+    ORDER_PAY_SUCCES,
+    ORDER_PAY_FAIL,
+    ORDER_PAY_RESET,
+    MY_ORDER_LIST_REQUEST,
+    MY_ORDER_LIST_SUCCES,
+    MY_ORDER_LIST_FAIL
 } from '../constance/productconstance'
 
 
@@ -33,4 +40,36 @@ export const orderdetailReducer = (state = {loading :true, orderItems: [],shippi
             return state;
     } 
 
+}
+
+export const orderPayReducer = (state= {}, action ) => {
+    switch (action.type) {
+        case ORDER_PAY_REQUEST:
+            return {loading :true};
+        case ORDER_PAY_SUCCES:
+            return {loading :false,  success : true};
+        case ORDER_PAY_FAIL:
+            return {loading :false, error : action.payload};
+        case ORDER_PAY_RESET:
+            return {}
+        default :
+            return state;
+    } 
+
+    
+}
+
+export const myOrderListReducer = (state= {orders:[]}, action ) => {
+    switch (action.type) {
+        case MY_ORDER_LIST_REQUEST:
+            return {loading :true};
+        case MY_ORDER_LIST_SUCCES:
+            return {loading :false,  orders : action.payload};
+        case MY_ORDER_LIST_FAIL:
+            return {loading :false, error : action.payload};
+        default :
+            return state;
+    } 
+
+    
 }

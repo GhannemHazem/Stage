@@ -31,6 +31,7 @@ const OrderSchema = new mongoose.Schema({
         update_time:{type: String},
         email_address:{type: String},
     },
+    createAt:{type:Date,required:true,default:Date.now()}
    
 })
 module.exports = mongoose.model('Order', OrderSchema)

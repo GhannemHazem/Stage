@@ -32,24 +32,51 @@ function Header() {
         <Nav className="ml-auto">
         <LinkContainer to='/Cart'><Nav.Link ><i className="fa-solid fa-cart-shopping"></i>Cart</Nav.Link></LinkContainer>
         
-        {user ?   (
+        {user && user.isadmin ? (
+        
+        <NavDropdown title='Admin' id= 'adminMenu'>{user.name}
+              <LinkContainer to='/admin/userlist'>
+                <NavDropdown.Item><i className="fa-solid fa-user" ></i>
+                  Users
+                </NavDropdown.Item>
+              </LinkContainer>
+
+              <LinkContainer to='/admin/productlist'>
+                <NavDropdown.Item><i className="fa-solid fa-boxes-packing" ></i>
+                  Products
+                </NavDropdown.Item>
+              </LinkContainer>
+
+              <LinkContainer to='/admin/orderlist'>
+                <NavDropdown.Item><i className="fa-solid fa-clipboard-list" ></i>
+                  Orders
+                </NavDropdown.Item>
+              </LinkContainer>
+
+              <NavDropdown.Item onClick={onLogout}><i className="fa-solid fa-arrow-right-from-bracket"></i>logout
+                </NavDropdown.Item>
+            </NavDropdown>
+            
+            
+        ) 
+        
+        
+        :user ?   (
+            
             
             <NavDropdown title={ user.lastName + user.firstName } id= 'username'>{user.name}
               <LinkContainer to='/profile'>
                 <NavDropdown.Item><i className="fa-solid fa-user" ></i>
-                  Profile
+                  Profile 
                 </NavDropdown.Item>
                 
               </LinkContainer>
               <NavDropdown.Item onClick={onLogout}><i className="fa-solid fa-arrow-right-from-bracket"></i>logout
                 </NavDropdown.Item>
-                
-
-              
             </NavDropdown>
             
             
-        ) : (
+        ) :(
           <> 
           
           <LinkContainer to='/login'><Nav.Link><i className="fa-solid fa-user" ></i>login</Nav.Link></LinkContainer>
@@ -57,6 +84,8 @@ function Header() {
           
           </>
         )}
+       
+        
         
           </Nav>
       

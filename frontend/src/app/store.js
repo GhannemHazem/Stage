@@ -6,20 +6,29 @@ import {productListReducer} from '../features/productReducer/productreducer'
 import {productDetailReducer} from '../features/productDetailReducer/productdetailpreducer'
 import {cartReducer} from '../features/CartReducer/cartReducer'
 import {shippingReducer} from '../features/shipping/shippingReducer'
-import {orderCreateReducer,orderdetailReducer} from '../features/orderReducer/orderReducer'
-import { usertDetailReducer ,usertUpdateProfileReducer} from '../features/auth/userReducer'
+import {orderCreateReducer,orderdetailReducer,orderPayReducer ,myOrderListReducer} from '../features/orderReducer/orderReducer'
+import { usertDetailReducer ,usertUpdateProfileReducer,adminUserList,adminUserDelete,
+  AdminGetUserReducer,AdminUpdateUserUserReducer} from '../features/auth/userReducer'
 
 
 const reducer = combineReducers({
   auth: authReducer,
+  userinfo: usertDetailReducer,
+  userupdateprofile: usertUpdateProfileReducer,
+  usersListAdmin:adminUserList,
+  usersDeleteAdmin:adminUserDelete,
+  admingetuser:AdminGetUserReducer,
+  adminupdateuser:AdminUpdateUserUserReducer,
   productlist: productListReducer,
   productdetail: productDetailReducer,
   cart:cartReducer,
-  userinfo: usertDetailReducer,
-  userupdateprofile: usertUpdateProfileReducer,
   shipping:shippingReducer,
   placeorder:orderCreateReducer,
   orderdetails: orderdetailReducer,
+  orderpay:orderPayReducer,
+  myOrdersList:myOrderListReducer,
+  
+
 })
 
 const shippingAdress =localStorage.getItem('shippingAddress')

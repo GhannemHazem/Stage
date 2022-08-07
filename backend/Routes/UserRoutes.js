@@ -6,14 +6,22 @@ const {
   getMe,
   getUserProfile,
   updateUserProfile,
+  getAllUsersAdmin,
+  adminDeleteUser,
+  adminGetUser,
+  updateUserAdmin
 } = require('../Controllers/UserController')
-const { protect } = require('../middleware/authMiddleware')
+const { protect,isAdmin } = require('../middleware/authMiddleware')
 
 router.post('/register', registerUser)
 router.post('/login', loginUser)
+router.get('/userslist', protect,isAdmin,getAllUsersAdmin)
+router.route('/:id').delete(protect,isAdmin,adminDeleteUser)
+.get(protect,isAdmin,adminGetUser)
+.put(protect,isAdmin,updateUserAdmin)
 router.get('/me', protect, getMe)
 router
-.route('/profile')
+.route('/profile/:id')
 .get (protect, getUserProfile)
 .put( protect, updateUserProfile)
 

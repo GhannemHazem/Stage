@@ -9,7 +9,8 @@ import Product from './pages/Product'
 import Home from './pages/Home'
 import Register from './pages/Register'
 import Profile from './pages/Profile'
-import Dashboard from './pages/Dashboard'
+import UserUpdateAdmin from './pages/UserUpdateAdmin'
+import Admin from './pages/Admin'
 import Shipping from './pages/Shipping'
 import PlaceOrder from './pages/PlaceOrder'
 import Payment from './pages/Payment'
@@ -32,7 +33,8 @@ function App() {
             <Route path='/Cart/:id' element={<Cart />} /> 
             <Route path='/Cart' element={<Cart />} /> 
             <Route path='/Order/:id' element={<Order />} /> 
-            <Route path='/Dashboard' element={<Dashboard />} /> 
+            <Route path='/Admin/:id/edit' element={<UserUpdateAdmin />} /> 
+            <Route path='/Admin/userlist' element={<Admin />} /> 
             <Route path='/Shipping' element={<Shipping />} /> 
             <Route path='/Placeorder' element={<PlaceOrder />} /> 
             <Route path='/Payment' element={<Payment />} /> 
