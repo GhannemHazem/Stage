@@ -2,7 +2,7 @@ import { createStore, combineReducers , applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import authReducer from '../features/auth/authSlice'
-import {productListReducer} from '../features/productReducer/productreducer'
+import {productListReducer,adminProductDelete} from '../features/productReducer/productreducer'
 import {productDetailReducer} from '../features/productDetailReducer/productdetailpreducer'
 import {cartReducer} from '../features/CartReducer/cartReducer'
 import {shippingReducer} from '../features/shipping/shippingReducer'
@@ -21,6 +21,7 @@ const reducer = combineReducers({
   adminupdateuser:AdminUpdateUserUserReducer,
   productlist: productListReducer,
   productdetail: productDetailReducer,
+  productDeleteAdmin: adminProductDelete,
   cart:cartReducer,
   shipping:shippingReducer,
   placeorder:orderCreateReducer,

@@ -18,4 +18,18 @@ const getProductId = asyncHandler (async (req, res) => {
     }
    
 })
-module.exports = {getProducts ,getProductId}
+
+const AdminDeleteProduct = asyncHandler(async (req, res) => {
+  
+    const product = await products.findById(req.params.id)
+  
+  
+    if (product) {
+      await product.remove()
+      res.json({message: 'product deleted'})
+    } else {
+      res.status(404)
+      throw new Error('product not deleted')
+    }
+  })
+module.exports = {getProducts ,getProductId,AdminDeleteProduct}

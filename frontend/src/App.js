@@ -10,6 +10,7 @@ import Home from './pages/Home'
 import Register from './pages/Register'
 import Profile from './pages/Profile'
 import UserUpdateAdmin from './pages/UserUpdateAdmin'
+import AdminProductList from './pages/AdminProductList'
 import Admin from './pages/Admin'
 import Shipping from './pages/Shipping'
 import PlaceOrder from './pages/PlaceOrder'
@@ -34,6 +35,7 @@ function App() {
             <Route path='/Cart' element={<Cart />} /> 
             <Route path='/Order/:id' element={<Order />} /> 
             <Route path='/Admin/:id/edit' element={<UserUpdateAdmin />} /> 
+            <Route path='/Admin/productlist' element={<AdminProductList />} /> 
             <Route path='/Admin/userlist' element={<Admin />} /> 
             <Route path='/Shipping' element={<Shipping />} /> 
             <Route path='/Placeorder' element={<PlaceOrder />} /> 
