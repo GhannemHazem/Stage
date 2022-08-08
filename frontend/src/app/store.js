@@ -2,7 +2,7 @@ import { createStore, combineReducers , applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import authReducer from '../features/auth/authSlice'
-import {productListReducer,adminProductDelete} from '../features/productReducer/productreducer'
+import {productListReducer,adminProductDelete,adminProductCreate,adminProductUpdtae} from '../features/productReducer/productreducer'
 import {productDetailReducer} from '../features/productDetailReducer/productdetailpreducer'
 import {cartReducer} from '../features/CartReducer/cartReducer'
 import {shippingReducer} from '../features/shipping/shippingReducer'
@@ -15,19 +15,21 @@ const reducer = combineReducers({
   auth: authReducer,
   userinfo: usertDetailReducer,
   userupdateprofile: usertUpdateProfileReducer,
-  usersListAdmin:adminUserList,
-  usersDeleteAdmin:adminUserDelete,
-  admingetuser:AdminGetUserReducer,
-  adminupdateuser:AdminUpdateUserUserReducer,
+  usersListAdmin: adminUserList,
+  usersDeleteAdmin: adminUserDelete,
+  admingetuser: AdminGetUserReducer,
+  adminupdateuser: AdminUpdateUserUserReducer,
   productlist: productListReducer,
   productdetail: productDetailReducer,
+  ProductUpdateAdmin: adminProductUpdtae,
   productDeleteAdmin: adminProductDelete,
-  cart:cartReducer,
-  shipping:shippingReducer,
-  placeorder:orderCreateReducer,
+  productcreateAdmin: adminProductCreate,
+  cart: cartReducer,
+  shipping: shippingReducer,
+  placeorder: orderCreateReducer,
   orderdetails: orderdetailReducer,
-  orderpay:orderPayReducer,
-  myOrdersList:myOrderListReducer,
+  orderpay: orderPayReducer,
+  myOrdersList: myOrderListReducer,
   
 
 })
