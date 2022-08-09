@@ -35,6 +35,12 @@ function Header() {
         {user && user.isadmin ? (
         
         <NavDropdown title='Admin' id= 'adminMenu'>{user.name}
+                <LinkContainer to='/profile'>
+                <NavDropdown.Item><i className="fa-solid fa-user" ></i>
+                  Profile 
+                </NavDropdown.Item>
+                
+              </LinkContainer>
               <LinkContainer to='/admin/userlist'>
                 <NavDropdown.Item><i className="fa-solid fa-user" ></i>
                   Users

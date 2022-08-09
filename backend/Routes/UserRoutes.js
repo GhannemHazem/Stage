@@ -3,7 +3,6 @@ const router = express.Router()
 const {
   registerUser,
   loginUser,
-  getMe,
   getUserProfile,
   updateUserProfile,
   getAllUsersAdmin,
@@ -19,7 +18,6 @@ router.get('/userslist', protect,isAdmin,getAllUsersAdmin)
 router.route('/:id').delete(protect,isAdmin,adminDeleteUser)
 .get(protect,isAdmin,adminGetUser)
 .put(protect,isAdmin,updateUserAdmin)
-router.get('/me', protect, getMe)
 router
 .route('/profile/:id')
 .get (protect, getUserProfile)

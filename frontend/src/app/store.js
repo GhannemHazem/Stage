@@ -6,7 +6,7 @@ import {productListReducer,adminProductDelete,adminProductCreate,adminProductUpd
 import {productDetailReducer} from '../features/productDetailReducer/productdetailpreducer'
 import {cartReducer} from '../features/CartReducer/cartReducer'
 import {shippingReducer} from '../features/shipping/shippingReducer'
-import {orderCreateReducer,orderdetailReducer,orderPayReducer ,myOrderListReducer} from '../features/orderReducer/orderReducer'
+import {orderCreateReducer,orderdetailReducer,orderPayReducer ,myOrderListReducer,AdminOrderListReducer,orderDeliverReducer} from '../features/orderReducer/orderReducer'
 import { usertDetailReducer ,usertUpdateProfileReducer,adminUserList,adminUserDelete,
   AdminGetUserReducer,AdminUpdateUserUserReducer} from '../features/auth/userReducer'
 
@@ -30,6 +30,8 @@ const reducer = combineReducers({
   orderdetails: orderdetailReducer,
   orderpay: orderPayReducer,
   myOrdersList: myOrderListReducer,
+  AdminOrderList:AdminOrderListReducer,
+  OrderDeliver:orderDeliverReducer,
   
 
 })

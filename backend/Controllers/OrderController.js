@@ -34,10 +34,7 @@ const addorder = asyncHandler (async (req, res) => {
 
 const detailorder = asyncHandler (async (req, res) => {
     
-    const order = await Order.findById(req.params.id).populate(
-        'user')
-        //const user =await User.findById(order.user)
-        
+    const order = await Order.findById(req.params.id).populate('user','email')
     if (order) {
         res.json(order)
         
@@ -74,11 +71,47 @@ const updateOrderToPaid = asyncHandler (async (req, res) => {
 })
 
 const userorders = asyncHandler (async (req, res) => {
-    console.log(req.user._id);
     const orders = await Order.find({user: req.user._id})
     res.json(orders)
     
         
   
 })
-module.exports = { addorder,detailorder ,updateOrderToPaid,userorders}
+
+const getAllOrdersAdmin =asyncHandler(async (req, res) => {
+  
+    const order = await Order.find({}).populate('user').exec();
+    console.log(order.user);
+  
+  
+    if (order) {
+       
+      res.json(order)
+    } else {
+      res.status(404)
+      throw new Error('order not found')
+    }
+  })
+
+
+  const updateOrderToDelivered = asyncHandler (async (req, res) => {
+    
+    const order = await Order.findById(req.params.id)
+    
+        
+    if (order) {
+        order.isDelivered =true
+        order.deliverddAt = Date.now()
+
+        const updatedorder = await order.save()
+        res.json(updatedorder)
+        
+    } else {
+        res.status(404)
+        throw new Error('no order delievred')
+
+    }
+})
+
+
+module.exports = { addorder,detailorder ,updateOrderToPaid,userorders,getAllOrdersAdmin,updateOrderToDelivered}

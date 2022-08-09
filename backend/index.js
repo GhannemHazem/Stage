@@ -10,14 +10,16 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-
+//image upload and access to it from frontend
+app.use('/Upload',express.static('Upload'))
+//Paypal
 app.get('/api/config/paypal',(req,res)=> 
-
 res.send(process.env.Paypal_ClientID))
-
+//Routes
 app.use('/api/users', require('./Routes/UserRoutes'));
 app.use('/api/order', require('./Routes/OrderRoutes'));
 app.use('/api/products', require('./Routes/ProductRoutes'));
+app.use('/api/upload', require('./Routes/UploadRoutes'));
 
 
 

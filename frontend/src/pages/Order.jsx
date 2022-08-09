@@ -6,8 +6,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import {Link,useNavigate,useParams} from 'react-router-dom'
 import Message from '../components/Message'
 import  Loader from '../components/Loader'
-import {detailorder,payorder} from '../features/orderReducer/orderaction'
-import { ORDER_PAY_RESET } from '../features/constance/productconstance'
+import {detailorder,payorder,Deliverorder} from '../features/orderReducer/orderaction'
+import { ORDER_PAY_RESET , ORDER_DELIVER_RESET} from '../features/constance/productconstance'
 const Order = () => {
    
     const dispatch =useDispatch()
@@ -20,13 +20,16 @@ const Order = () => {
 
     
     const orderdetails=useSelector(state => state.orderdetails)
-    const {order,loading,error} = orderdetails
+    const {order,loading,error} = orderdetails 
 
     const orderpay=useSelector(state => state.orderpay)
     const {loading: loadingPay,success: successPay} = orderpay
 
     const auth=useSelector(state => state.auth)
     const {user} = auth
+
+    const OrderDeliver=useSelector(state => state.OrderDeliver)
+    const {success:successDeliver,loading:loadingDeliver } = OrderDeliver
 
 
  
@@ -53,8 +56,10 @@ const Order = () => {
         }
         
 
-        if(!order || order._id !==id || successPay){
+        if(!order || successPay ){
+          
            dispatch({type: ORDER_PAY_RESET}) 
+          
         dispatch(detailorder(id))      
         }else if (!order.isPaid){
             if(!window.paypal){
@@ -64,11 +69,16 @@ const Order = () => {
             setSdkReady(true)
             }
         }
-    },[id,order,successPay])
+    },[id,order,successPay,successDeliver])
 
     const successPaymentHandler =(paymentResult) =>{
-        console.log(paymentResult)
         dispatch(payorder(id,paymentResult))
+
+    }
+    const deliverHandler=() =>{
+      
+        dispatch(Deliverorder(order))
+        dispatch({type: ORDER_DELIVER_RESET}) 
 
     }
     
@@ -87,8 +97,8 @@ const Order = () => {
                     <a href={`mailto:${user.email}`}>{user.email}</a>
                     <p>
                         <strong>Address: </strong>
-                        {order.isDelivred?<Message variant='success'>
-                        Delivred on {String(order.DelivredAt).slice(0,16)}</Message>:
+                        { order.isDelivered ? <Message variant='success'>
+                        Delivred on {String(order.deliverddAt).slice(0,16)}</Message>:
                         <Message variant='danger'>Not Delivred</Message>}
                         {order.shippingAddress.address} ,
                         {order.shippingAddress.city} ,
@@ -120,7 +130,8 @@ const Order = () => {
                                   
                                     <Row>
                                         <Col md={3}>
-                                            <Image src={`/${item.image}`} alt={item.name} fluid rounded></Image>
+                                            <Image src={`${item.image}`} alt={item.name} fluid rounded></Image>
+                                            {console.log(item.image)}
                                         </Col>
                                         <Col>
                                         <Link to={`/product/${item.product}`}>
@@ -172,7 +183,7 @@ const Order = () => {
                             <Col>${order.TotalPrice}</Col>
                         </Row>
                     </ListGroupItem>
-                    {!order.isPaid &&(
+                    {!order.isPaid && user._id === order.user &&(
                         <ListGroupItem>
                             {loadingPay && <Loader/>}
                             {!sdkReady ? <Loader/>:(
@@ -182,7 +193,14 @@ const Order = () => {
                             )}
                         </ListGroupItem>
                     )}
-
+                    {loadingDeliver && <Loader></Loader>}
+                    {user.isadmin && order.isPaid && !order.isDelivered && (
+                        <ListGroupItem>
+                            <Button type='button' className ='btn btn-block' onClick={deliverHandler}>
+                                Deliver
+                            </Button>
+                        </ListGroupItem>
+                    ) }
                 </ListGroup>
             </Card>
         </Col>

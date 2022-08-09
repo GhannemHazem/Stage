@@ -18,6 +18,7 @@ import PlaceOrder from './pages/PlaceOrder'
 import Payment from './pages/Payment'
 import { Container } from 'react-bootstrap'
 import Order from './pages/Order'
+import OrderList from './pages/OrderList'
 
 function App() {
   return (
@@ -45,6 +46,7 @@ function App() {
             <Route path='/login' element={<Login />}  />
             <Route path='/register' element={<Register />} />
             <Route path='/product/:id' element={<Product />} />
+            <Route path='/admin/orderlist' element={<OrderList />} />
            
             {/* <Route path='*' element={<Navigate to ='/' />} />  */}
           </Routes>

@@ -7,7 +7,7 @@ import Loader from '../components/Loader'
 import { listproductDetails } from '../features/productDetailReducer/productdetailaction'
 import { adminProductUpdate } from '../features/productReducer/productaction'
 import {PRODUCT_UPDATE_RESTE} from '../features/constance/productconstance'
-
+import axios from 'axios'
 
 
 
@@ -20,6 +20,8 @@ const AdminEditProduct = () => {
   const [ brand , setBrand ]=useState('')
   const [ category , setCategory ]=useState('')
   const [ description , setDescription ]=useState('')
+  const [ uploading , setUploading ]=useState(false)
+
   const dispatch = useDispatch() 
   const navigate=useNavigate()
   const id = useParams().id;
@@ -54,7 +56,7 @@ const AdminEditProduct = () => {
         
         
         
-    },[dispatch,product,id,sucess])
+    },[dispatch,product,id,sucess,navigate])
  
   const submitHandler =(e)=>{
     e.preventDefault()
@@ -70,7 +72,26 @@ const AdminEditProduct = () => {
      }))
   }
   
-
+  const uploadFileHandler = async(e) =>{
+    const file = e.target.files[0]
+    const formData = new FormData()
+    formData.append('image',file)
+    setUploading(true)
+    try{
+const config ={
+  headers:{
+    'Content-Type':'multipart/form-data'
+  }
+  }
+  const {data} =  await axios.post('/api/upload',formData,config)
+  
+  setImage(data)
+  setUploading(false)
+    }catch(error){
+      console.error(error)
+      setUploading(false)
+    }
+  }
   
 
   return (
@@ -121,12 +142,17 @@ const AdminEditProduct = () => {
           <Form.Label>
             Image
           </Form.Label>
-          <Form.Control
-          type='text'
-          placeholer='entre image url'
-          value={image}
-          onChange={(e)=> setImage(e.target.value)}
-          ></Form.Control>
+          
+          
+          <Form.Control type="file"
+          id='image-file'
+          label='Choose File'
+          custom
+          onChange={uploadFileHandler} />
+
+          
+          {uploading && <Loader></Loader>}
+
 
           
   

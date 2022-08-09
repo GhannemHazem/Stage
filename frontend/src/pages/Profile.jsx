@@ -176,7 +176,7 @@ const Profile = () => {
                   <td>{order.isPaid ? String(order.paidAt).slice(0,10) : (
                     <i className='fas fa-times' style ={{color: 'red'}}></i>
                   )}</td>
-                  <td>{order.isDelivered ? String(order.deliveredAt).slice(0,10) : (
+                  <td>{order.isDelivered ? String(order.deliverddAt).slice(0,10) : (
                     <i className='fas fa-times' style ={{color: 'red'}}></i>
                   )}</td>
 
