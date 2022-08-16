@@ -8,7 +8,8 @@ const UserSchema = new mongoose.Schema({
     lastName: {type: String , required: true},
     phone: {type: String ,require: true },
     image: {type: String },
-    createdAt: {type: Date , default: Date.now},
-    bloque: {type: Boolean , default: false }
+    createdAt: {type: Date , required: true, default: Date.now},
+    bloque: {type: Boolean , required: true, default: false },
+    verify: {type: Boolean , required: true, default: false }
 })
 module.exports = mongoose.model('User', UserSchema)

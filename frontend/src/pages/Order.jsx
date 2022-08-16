@@ -56,9 +56,10 @@ const Order = () => {
         }
         
 
-        if(!order || successPay ){
+        if(!order || successPay || successDeliver){
           
            dispatch({type: ORDER_PAY_RESET}) 
+           dispatch({type: ORDER_DELIVER_RESET})
           
         dispatch(detailorder(id))      
         }else if (!order.isPaid){
@@ -76,10 +77,7 @@ const Order = () => {
 
     }
     const deliverHandler=() =>{
-      
         dispatch(Deliverorder(order))
-        dispatch({type: ORDER_DELIVER_RESET}) 
-
     }
     
     

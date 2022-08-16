@@ -33,7 +33,8 @@ const OrderList = () => {
 
   return (
     <>
-    <h1>Users</h1>
+    <h1>Orders</h1>
+    <h4>You got {!loading ? ordersList.length: ''} Orders</h4>
 
     {loading ? <Loader /> : error ? <Message variant='danger' >{error}</Message>:(
          <Table striped bordered hover responsive className='table-sm'>

@@ -61,6 +61,7 @@ const AdminProductList = () => {
     <Row className= 'text-right'>
         <Col>
         <h1>Products</h1>
+        <h4>You got {!loading ? products.length: ''} Product</h4>
         </Col>
         <Col className= 'text-right'>
             <Button className= 'my-3' onClick={createProductHandler}>

@@ -43,6 +43,7 @@ const Admin = () => {
   return (
     <>
     <h1>Users</h1>
+    <h4>You got {!loading ? userslist.length: ''} Users</h4>
 
     {loading ? <Loader /> : error ? <Message variant='danger' >{error}</Message>:(
          <Table striped bordered hover responsive className='table-sm'>

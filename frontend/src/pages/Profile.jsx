@@ -151,13 +151,13 @@ const Profile = () => {
       </Col>
       <Col md={9}>
         <h2>My Orders  </h2>
-        <h4>Your got {!ListOrdersloading ?orders.length: ''} Orders</h4>
+        <h4>Your got {!ListOrdersloading ? orders.length: ''} Orders</h4>
         
         {ListOrdersloading ? <Loader/>: ListOrderserror ? <Message variant='danger'>{ListOrderserror}</Message> :(
           <Table striped bordered hover responsice className='table-sm'>
             <thead>
               <tr>
-                <th>ID</th>
+                <th>Order Code</th>
                 <th>DATE</th>
                 <th>TOTAL</th>
                 <th>PAID</th>
